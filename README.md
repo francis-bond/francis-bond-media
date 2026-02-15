@@ -2,11 +2,28 @@
 
 Portfolio website for Francis Bond Media — hospitality photography and videography for luxury hotels, boutique properties, and short-term rentals.
 
-**Live site:** [francis-bond.github.io/francis-bond-media](https://francis-bond.github.io/francis-bond-media/)
+**Live site:** [francisbondmedia.com](https://francisbondmedia.com)
+
+## Features
+
+- **Hero slideshow** — Rotating highlight images across projects
+- **Stats section** — Data-driven case for professional photography
+- **Portfolio preview** — 2x2 grid linking to individual project galleries
+- **Services** — Photography, Videography, and Drone & Aerial
+- **About** — Bio and headshot
+- **CTA** — Call-to-action leading to contact page
+- **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed
+- **Instagram** — @francisbondmedia linked in footer across all pages
+- **Responsive** — Mobile hamburger nav with close-on-outside-click
+
+## Tech Stack
+
+- Static HTML/CSS/JS (no framework, no build step)
+- [Sharp](https://sharp.pixelplumbing.com/) for image optimization
+- GitHub Pages hosting with custom domain via Cloudflare DNS
+- Formspree for contact form submissions
 
 ## Local Development
-
-This is a static HTML/CSS/JS site with no build step required.
 
 1. Clone the repo:
    ```
@@ -28,4 +45,4 @@ npm install
 npm run optimize
 ```
 
-This uses [sharp](https://sharp.pixelplumbing.com/) to generate full-size (2400px) and thumbnail (1200px) versions into `assets/images/`.
+This generates full-size (2400px) and thumbnail (1200px) versions into `assets/images/`.
