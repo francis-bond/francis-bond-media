@@ -17,16 +17,25 @@ const navToggle = document.querySelector('.nav__toggle');
 const navLinks = document.querySelector('.nav__links');
 
 if (navToggle && navLinks) {
+  function closeNav() {
+    navToggle.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
+
   navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('open');
     navLinks.classList.toggle('open');
   });
 
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+      closeNav();
+    }
+  });
+
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('open');
-      navLinks.classList.remove('open');
-    });
+    link.addEventListener('click', closeNav);
   });
 }
 

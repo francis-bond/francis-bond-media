@@ -889,6 +889,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     transform: translateX(0);
   }
 
+  .nav--hero .nav__toggle.open span {
+    background: var(--color-text);
+  }
+
   .nav--hero .nav__links.open a {
     color: var(--color-text);
   }
