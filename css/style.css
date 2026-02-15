@@ -218,7 +218,22 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 /* --- Section Spacing --- */
 .section {
-  padding: 8rem 3rem;
+  padding: 6rem 3rem;
+  position: relative;
+}
+
+.section + .section::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
+  margin: 0 auto 4rem;
+}
+
+.section--dark + .section::before,
+.section + .section--dark::before {
+  display: none;
 }
 
 .section--narrow {
@@ -237,14 +252,14 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 .stats__card {
   text-align: center;
-  padding: 2.5rem 1.5rem;
+  padding: 1.5rem 1.5rem;
 }
 
 .stats__number {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   color: var(--color-accent);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   line-height: 1;
 }
 
@@ -269,7 +284,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 .section__heading {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .section__heading h2 {
@@ -281,6 +296,144 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   font-size: 1.05rem;
   max-width: 550px;
   margin: 0 auto;
+}
+
+/* --- Portfolio Preview --- */
+.preview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.preview__card {
+  display: block;
+  text-align: center;
+  transition: transform var(--transition);
+}
+
+.preview__card:hover {
+  transform: translateY(-4px);
+}
+
+.preview__image {
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  aspect-ratio: 3 / 2;
+}
+
+.preview__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.preview__card:hover .preview__image img {
+  transform: scale(1.03);
+}
+
+.preview__name {
+  margin-bottom: 0.25rem;
+}
+
+.preview__tags {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.preview__more {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.preview__link {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition: color var(--transition);
+}
+
+.preview__link:hover {
+  color: var(--color-accent-hover);
+}
+
+/* --- Services Section --- */
+.section--dark {
+  background: #f0eeeb;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.services__card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.services__card h3 {
+  margin-bottom: 1rem;
+}
+
+.services__card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+}
+
+/* --- CTA Section --- */
+.cta {
+  padding: 6rem 3rem;
+  text-align: center;
+  background: var(--color-text);
+  color: var(--color-white);
+}
+
+.cta__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--color-white);
+}
+
+.cta__text {
+  font-size: 1rem;
+  opacity: 0.75;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta__button {
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-white);
+  border: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.cta__button:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
 }
 
 /* --- About Section --- */
@@ -444,7 +597,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 /* --- Project Page --- */
 .project-header {
-  padding: 10rem 3rem 4rem;
+  padding: 2rem 3rem 4rem;
   text-align: center;
 }
 
@@ -522,8 +675,8 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0 3rem;
-  margin-bottom: 2rem;
-  margin-top: 8rem;
+  margin-bottom: 0;
+  margin-top: 5rem;
   color: var(--color-text-light);
   transition: color var(--transition);
 }
@@ -738,12 +891,26 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   }
 
   .section {
-    padding: 5rem 1.5rem;
+    padding: 4rem 1.5rem;
   }
 
   .stats {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .preview {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cta {
+    padding: 4rem 1.5rem;
   }
 
   .about {
@@ -764,7 +931,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   }
 
   .project-header {
-    padding: 8rem 1.5rem 3rem;
+    padding: 1.5rem 1.5rem 2rem;
   }
 
   .project-gallery {
@@ -787,7 +954,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
   .project-back {
     padding: 0 1.5rem;
-    margin-top: 6rem;
+    margin-top: 4.5rem;
   }
 
   .contact {
