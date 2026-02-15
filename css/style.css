@@ -870,11 +870,14 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   }
 
   .nav__links {
+    display: flex !important;
     position: fixed;
     top: 0;
+    left: auto;
     right: 0;
     bottom: 0;
     width: 280px;
+    height: 100vh;
     z-index: 101;
     background: var(--color-bg);
     flex-direction: column;
