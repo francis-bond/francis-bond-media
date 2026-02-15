@@ -232,7 +232,9 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 }
 
 .section--dark + .section::before,
-.section + .section--dark::before {
+.section + .section--dark::before,
+.section--muted + .section::before,
+.section + .section--muted::before {
   display: none;
 }
 
@@ -365,8 +367,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 }
 
 /* --- Services Section --- */
+.section--muted {
+  background: #f3f1ee;
+}
+
 .section--dark {
-  background: #f0eeeb;
+  background: #eae7e2;
 }
 
 .services {
@@ -380,6 +386,14 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .services__card {
   text-align: center;
   padding: 2rem 1.5rem;
+}
+
+.services__icon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-accent);
+  margin: 0 auto 1.25rem;
+  display: block;
 }
 
 .services__card h3 {
@@ -873,6 +887,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
   .nav__links.open {
     transform: translateX(0);
+  }
+
+  .nav--hero .nav__links.open a {
+    color: var(--color-text);
+  }
+
+  .nav--hero .nav__links.open a:hover {
+    color: var(--color-accent);
+    opacity: 1;
   }
 
   .nav__toggle {
