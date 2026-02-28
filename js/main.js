@@ -59,43 +59,97 @@ if (slides.length > 1) {
   }, 5000);
 }
 
-// ===== JUSTIFIED GALLERY WITH ORIENTATION GROUPING =====
-// Fetches manifest.json to get each image's dimensions and orientation.
-// Portrait images are grouped first, landscape second.
-// flex-basis is set per item so each image fills its row height at its natural aspect ratio.
+// ===== PROJECT GALLERY LAYOUT =====
+// Builds a row-based justified layout from manifest.json data.
+// Rules: max 3 portraits per row, max 2 landscapes per row,
+// mixed rows (1P + 1L) use portrait height. Rows with fewer images are centered.
 (function () {
   var gallery = document.querySelector('.project-gallery');
   if (!gallery) return;
   var firstImg = gallery.querySelector('img');
   if (!firstImg) return;
 
-  // Derive manifest URL from the first image's resolved src
   var manifestUrl = firstImg.src.replace(/\/\d+-full\.jpg$/, '/manifest.json');
-
-  var ROW_HEIGHT = 420;
 
   fetch(manifestUrl)
     .then(function (r) { return r.json(); })
     .then(function (manifest) {
-      var items = Array.prototype.slice.call(gallery.querySelectorAll('.project-gallery__item'));
+      var containerWidth = gallery.offsetWidth || window.innerWidth;
+      var isMobile = containerWidth < 768;
+      var GAP = isMobile ? 8 : 12;
+      var MAX_H = isMobile ? 320 : 700;
 
-      items.forEach(function (item) {
-        var img = item.querySelector('img');
+      // Collect items with their manifest data
+      var allItems = [];
+      gallery.querySelectorAll('.project-gallery__item').forEach(function (el) {
+        var img = el.querySelector('img');
         if (!img) return;
         var m = img.src.match(/\/(\d+)-full\.jpg/);
         if (!m) return;
-        var data = manifest[m[1]];
-        if (!data) return;
-        item.dataset.orientation = data.orientation;
-        item.style.flexBasis = (ROW_HEIGHT * data.width / data.height) + 'px';
+        var d = manifest[m[1]];
+        if (!d) return;
+        allItems.push({ el: el, w: d.width, h: d.height, orient: d.orientation });
       });
 
-      // Reorder: all portrait items first, then landscape
-      var portraits = items.filter(function (i) { return i.dataset.orientation === 'portrait'; });
-      var landscapes = items.filter(function (i) { return i.dataset.orientation === 'landscape'; });
-      portraits.concat(landscapes).forEach(function (item) { gallery.appendChild(item); });
+      var portraits = allItems.filter(function (i) { return i.orient === 'portrait'; });
+      var landscapes = allItems.filter(function (i) { return i.orient === 'landscape'; });
+
+      // Build row groups (arrays of items)
+      var rows = buildRows(portraits.slice(), landscapes.slice());
+
+      // Rebuild gallery DOM with explicit row divs
+      while (gallery.firstChild) gallery.removeChild(gallery.firstChild);
+
+      rows.forEach(function (rowItems) {
+        var rowEl = document.createElement('div');
+        rowEl.className = 'gallery-row';
+
+        var totalGaps = (rowItems.length - 1) * GAP;
+        var sumRatios = rowItems.reduce(function (s, i) { return s + i.w / i.h; }, 0);
+        var rowH = Math.min((containerWidth - totalGaps) / sumRatios, MAX_H);
+
+        rowItems.forEach(function (item) {
+          item.el.className = 'gallery-row__item';
+          item.el.style.width = Math.round(rowH * item.w / item.h) + 'px';
+          item.el.style.height = Math.round(rowH) + 'px';
+          rowEl.appendChild(item.el);
+        });
+
+        gallery.appendChild(rowEl);
+      });
     })
     .catch(function (e) { console.warn('Gallery manifest not found:', e); });
+
+  // Deterministic row-building algorithm.
+  // Pattern: portrait rows (alternating 3/2) with a mixed or landscape row
+  // inserted every 2 portrait rows for visual variety.
+  function buildRows(p, l) {
+    var rows = [];
+    var pBatch = 3;
+    var breakCount = 0;
+
+    while (p.length > 0 || l.length > 0) {
+      if (p.length === 0) {
+        rows.push(l.splice(0, Math.min(2, l.length)));
+      } else if (l.length === 0) {
+        rows.push(p.splice(0, Math.min(pBatch, p.length)));
+        pBatch = pBatch === 3 ? 2 : 3;
+      } else if (breakCount >= 2) {
+        // Insert variety: alternate between mixed and landscape-only rows
+        if (breakCount % 2 === 0) {
+          rows.push([p.shift(), l.shift()]); // mixed: 1P + 1L
+        } else {
+          rows.push(l.splice(0, Math.min(2, l.length))); // landscape row
+        }
+        breakCount = 0;
+      } else {
+        rows.push(p.splice(0, Math.min(pBatch, p.length)));
+        pBatch = pBatch === 3 ? 2 : 3;
+        breakCount++;
+      }
+    }
+    return rows;
+  }
 }());
 
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====

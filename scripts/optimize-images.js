@@ -64,14 +64,17 @@ async function main() {
       const inputPath = path.join(srcDir, files[i]);
       const baseName = String(i + 1).padStart(2, '0');
 
-      const meta = await sharp(inputPath).metadata();
+      await optimizeImage(inputPath, outDir, baseName);
+
+      // Read dimensions from the output file — sharp auto-applies EXIF rotation
+      // during resize, so output dimensions are always orientation-correct.
+      const outputPath = path.join(outDir, `${baseName}-full.jpg`);
+      const meta = await sharp(outputPath).metadata();
       manifest[baseName] = {
         width: meta.width,
         height: meta.height,
         orientation: meta.height > meta.width ? 'portrait' : 'landscape',
       };
-
-      await optimizeImage(inputPath, outDir, baseName);
     }
 
     fs.writeFileSync(
