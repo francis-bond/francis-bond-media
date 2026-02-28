@@ -643,18 +643,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 .project-gallery__item {
   flex: 1 1 auto;
-  height: 360px;
+  height: 420px;
   overflow: hidden;
   border-radius: 3px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.project-gallery__item[data-orientation="portrait"] {
-  height: 520px;
-}
-
-.project-gallery__item[data-orientation="landscape"] {
-  height: 360px;
 }
 
 .project-gallery__item:hover {
@@ -964,15 +956,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   }
 
   .project-gallery__item {
-    height: 210px;
-  }
-
-  .project-gallery__item[data-orientation="portrait"] {
-    height: 300px;
-  }
-
-  .project-gallery__item[data-orientation="landscape"] {
-    height: 210px;
+    height: 240px;
   }
 
   .project-back {

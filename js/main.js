@@ -65,7 +65,7 @@ if (slides.length > 1) {
   // Derive manifest URL from the first image's resolved src
   var manifestUrl = firstImg.src.replace(/\/\d+-full\.jpg$/, '/manifest.json');
 
-  var ROW_HEIGHT = { portrait: 520, landscape: 360 };
+  var ROW_HEIGHT = 420;
 
   fetch(manifestUrl)
     .then(function (r) { return r.json(); })
@@ -79,11 +79,8 @@ if (slides.length > 1) {
         if (!m) return;
         var data = manifest[m[1]];
         if (!data) return;
-        var orient = data.orientation;
-        var h = ROW_HEIGHT[orient];
-        item.dataset.orientation = orient;
-        item.style.height = h + 'px';
-        item.style.flexBasis = (h * data.width / data.height) + 'px';
+        item.dataset.orientation = data.orientation;
+        item.style.flexBasis = (ROW_HEIGHT * data.width / data.height) + 'px';
       });
 
       // Reorder: all portrait items first, then landscape
