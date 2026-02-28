@@ -288,6 +288,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 /* --- Stats Section Parallax --- */
 .stats-section {
   overflow: hidden;
+  border-top: 2px solid var(--color-accent);
 }
 
 .stats__parallax-bg {
