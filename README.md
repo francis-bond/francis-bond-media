@@ -8,7 +8,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 
 - **Hero slideshow** — Rotating highlight images across projects
 - **Stats section** — Data-driven case for professional photography
-- **Portfolio preview** — 2x2 grid linking to individual project galleries
+- **Portfolio preview** — 2x2 grid linking to individual project galleries (Lucky Arrow, Halcyon, Riu Mexico, Willow House)
 - **Services** — Photography, Videography, and Drone & Aerial
 - **About** — Bio and headshot
 - **CTA** — Call-to-action leading to contact page

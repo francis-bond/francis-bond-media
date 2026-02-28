@@ -11,6 +11,7 @@ const PROPERTIES = [
   { folder: 'Portola', slug: 'portola' },
   { folder: 'Four Seasons Austin', slug: 'four-seasons' },
   { folder: 'Riu Mexico', slug: 'riu-mexico' },
+  { folder: 'Willow House Final Website', slug: 'willow-house' },
 ];
 
 const SIZES = [
