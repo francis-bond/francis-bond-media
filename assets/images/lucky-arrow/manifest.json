@@ -1,0 +1,82 @@
+{
+  "10": {
+    "width": 4000,
+    "height": 2667,
+    "orientation": "landscape"
+  },
+  "11": {
+    "width": 4000,
+    "height": 2668,
+    "orientation": "landscape"
+  },
+  "12": {
+    "width": 4000,
+    "height": 3000,
+    "orientation": "landscape"
+  },
+  "13": {
+    "width": 2668,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "14": {
+    "width": 2668,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "15": {
+    "width": 4000,
+    "height": 2667,
+    "orientation": "landscape"
+  },
+  "16": {
+    "width": 3000,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "01": {
+    "width": 4000,
+    "height": 2667,
+    "orientation": "landscape"
+  },
+  "02": {
+    "width": 2667,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "03": {
+    "width": 2667,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "04": {
+    "width": 4000,
+    "height": 2668,
+    "orientation": "landscape"
+  },
+  "05": {
+    "width": 4000,
+    "height": 4000,
+    "orientation": "landscape"
+  },
+  "06": {
+    "width": 4000,
+    "height": 2667,
+    "orientation": "landscape"
+  },
+  "07": {
+    "width": 3000,
+    "height": 4000,
+    "orientation": "portrait"
+  },
+  "08": {
+    "width": 4000,
+    "height": 2668,
+    "orientation": "landscape"
+  },
+  "09": {
+    "width": 4000,
+    "height": 2668,
+    "orientation": "landscape"
+  }
+}

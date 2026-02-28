@@ -52,21 +52,46 @@ if (slides.length > 1) {
   }, 5000);
 }
 
-// ===== JUSTIFIED GALLERY =====
-// Sets flex-basis on each gallery item based on the image's natural aspect ratio,
-// so portrait images appear portrait and landscape images appear landscape at uniform row height.
+// ===== JUSTIFIED GALLERY WITH ORIENTATION GROUPING =====
+// Fetches manifest.json to get each image's dimensions and orientation.
+// Portrait images are grouped first, landscape second.
+// flex-basis is set per item so each image fills its row height at its natural aspect ratio.
 (function () {
-  const ROW_HEIGHT = 380;
-  document.querySelectorAll('.project-gallery__item:not(:first-child)').forEach(function (item) {
-    var img = item.querySelector('img');
-    if (!img) return;
-    function apply() {
-      if (img.naturalWidth && img.naturalHeight) {
-        item.style.flexBasis = (ROW_HEIGHT * img.naturalWidth / img.naturalHeight) + 'px';
-      }
-    }
-    if (img.complete) { apply(); } else { img.addEventListener('load', apply); }
-  });
+  var gallery = document.querySelector('.project-gallery');
+  if (!gallery) return;
+  var firstImg = gallery.querySelector('img');
+  if (!firstImg) return;
+
+  // Derive manifest URL from the first image's resolved src
+  var manifestUrl = firstImg.src.replace(/\/\d+-full\.jpg$/, '/manifest.json');
+
+  var ROW_HEIGHT = { portrait: 520, landscape: 360 };
+
+  fetch(manifestUrl)
+    .then(function (r) { return r.json(); })
+    .then(function (manifest) {
+      var items = Array.prototype.slice.call(gallery.querySelectorAll('.project-gallery__item'));
+
+      items.forEach(function (item) {
+        var img = item.querySelector('img');
+        if (!img) return;
+        var m = img.src.match(/\/(\d+)-full\.jpg/);
+        if (!m) return;
+        var data = manifest[m[1]];
+        if (!data) return;
+        var orient = data.orientation;
+        var h = ROW_HEIGHT[orient];
+        item.dataset.orientation = orient;
+        item.style.height = h + 'px';
+        item.style.flexBasis = (h * data.width / data.height) + 'px';
+      });
+
+      // Reorder: all portrait items first, then landscape
+      var portraits = items.filter(function (i) { return i.dataset.orientation === 'portrait'; });
+      var landscapes = items.filter(function (i) { return i.dataset.orientation === 'landscape'; });
+      portraits.concat(landscapes).forEach(function (item) { gallery.appendChild(item); });
+    })
+    .catch(function (e) { console.warn('Gallery manifest not found:', e); });
 }());
 
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====

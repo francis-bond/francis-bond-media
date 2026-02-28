@@ -58,13 +58,28 @@ async function main() {
       .filter(f => /\.(jpg|jpeg|png|tiff?)$/i.test(f))
       .sort();
 
+    const manifest = {};
+
     for (let i = 0; i < files.length; i++) {
       const inputPath = path.join(srcDir, files[i]);
       const baseName = String(i + 1).padStart(2, '0');
+
+      const meta = await sharp(inputPath).metadata();
+      manifest[baseName] = {
+        width: meta.width,
+        height: meta.height,
+        orientation: meta.height > meta.width ? 'portrait' : 'landscape',
+      };
+
       await optimizeImage(inputPath, outDir, baseName);
     }
 
-    console.log(`  ✓ ${files.length} images processed\n`);
+    fs.writeFileSync(
+      path.join(outDir, 'manifest.json'),
+      JSON.stringify(manifest, null, 2)
+    );
+
+    console.log(`  ✓ ${files.length} images processed, manifest.json written\n`);
   }
 
   console.log('Done!');
