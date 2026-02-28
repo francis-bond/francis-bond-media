@@ -152,6 +152,30 @@ if (slides.length > 1) {
   }
 }());
 
+// ===== STATS SECTION PARALLAX =====
+(function () {
+  var section = document.querySelector('.stats-section');
+  var bg = document.querySelector('.stats__parallax-bg');
+  if (!section || !bg || window.innerWidth < 768) return;
+
+  var RANGE = 80; // px the background travels top-to-bottom
+
+  function updateParallax() {
+    var rect = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var sh = section.offsetHeight;
+    // progress: 0 when section bottom enters viewport, 1 when section top exits at top
+    var entered = vh - rect.top;
+    var progress = Math.max(0, Math.min(1, entered / (vh + sh)));
+    // translateY: -RANGE shows bottom of image, +RANGE shows top of image
+    var y = RANGE * (2 * progress - 1);
+    bg.style.transform = 'translateY(' + y + 'px)';
+  }
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  updateParallax();
+}());
+
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====
 const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .stagger');
 
