@@ -52,6 +52,23 @@ if (slides.length > 1) {
   }, 5000);
 }
 
+// ===== JUSTIFIED GALLERY =====
+// Sets flex-basis on each gallery item based on the image's natural aspect ratio,
+// so portrait images appear portrait and landscape images appear landscape at uniform row height.
+(function () {
+  const ROW_HEIGHT = 380;
+  document.querySelectorAll('.project-gallery__item:not(:first-child)').forEach(function (item) {
+    var img = item.querySelector('img');
+    if (!img) return;
+    function apply() {
+      if (img.naturalWidth && img.naturalHeight) {
+        item.style.flexBasis = (ROW_HEIGHT * img.naturalWidth / img.naturalHeight) + 'px';
+      }
+    }
+    if (img.complete) { apply(); } else { img.addEventListener('load', apply); }
+  });
+}());
+
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====
 const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .stagger');
 
