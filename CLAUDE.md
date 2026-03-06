@@ -116,7 +116,7 @@ Project gallery pages use a JS-driven row-based justified layout:
 
 ## Contact Info
 - Phone: +1 (281) 203-4083
-- Email: Francisbondmedia@gmail.com
+- Email: francis@francisbondmedia.com
 - Instagram: @francisbondmedia
 - Based in Austin, TX
 
