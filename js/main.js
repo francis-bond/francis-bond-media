@@ -196,9 +196,9 @@ if (slides.length > 1) {
     lbImg.alt = images[currentIndex].alt;
   }
 
-  // Open on image click
+  // Open on image click/tap
   gallery.addEventListener('click', function (e) {
-    var img = e.target.closest('img');
+    var img = e.target.tagName === 'IMG' ? e.target : e.target.querySelector('img');
     if (!img) return;
     collectImages();
     var idx = images.indexOf(img);
