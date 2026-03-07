@@ -14,6 +14,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 - **CTA** — Call-to-action leading to contact page
 - **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed
 - **Instagram** — @francisbondmedia linked in footer across all pages
+- **Lightbox** — Tap/click any gallery image to view fullscreen; navigate between images with arrows or swipe; close via button, backdrop tap, or Escape key
 - **Responsive** — Mobile hamburger nav with close-on-outside-click
 
 ## Tech Stack

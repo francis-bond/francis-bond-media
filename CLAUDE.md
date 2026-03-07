@@ -32,7 +32,7 @@ projects/           - Individual project pages (one per property)
   riu-mexico.html
   four-seasons.html
 css/style.css       - All styles (single file)
-js/main.js          - Shared JS (nav toggle, scroll animations, hero slideshow, gallery layout)
+js/main.js          - Shared JS (nav toggle, scroll animations, hero slideshow, gallery layout, lightbox)
 js/portfolio.js     - Portfolio page hover background effect
 assets/images/      - Optimized images, organized by project name
   <slug>/
@@ -97,6 +97,14 @@ Project gallery pages use a JS-driven row-based justified layout:
 - **Centering:** `justify-content: center` on `.gallery-row` — rows with fewer images center naturally
 - **No cropping:** `object-fit: cover` on images that perfectly match their container ratio
 - CSS classes used: `.project-gallery` (column flex container), `.gallery-row` (row), `.gallery-row__item` (item)
+
+## Lightbox (js/main.js)
+- Built dynamically on project gallery pages (pages with `.project-gallery`)
+- Opens fullscreen overlay on image tap/click; close via x button, backdrop tap, or Escape
+- Left/right arrow buttons navigate all images in a loop; keyboard arrows and swipe gestures supported
+- Collects images after gallery layout builds, so it works with the row-based layout system
+- CSS classes: `.lightbox`, `.lightbox__img`, `.lightbox__close`, `.lightbox__nav`, `.lightbox__nav--prev/--next`
+- Body scroll is locked while lightbox is open
 
 ## Conventions
 - BEM-style CSS class naming (e.g., `hero__title`, `nav__links`, `stats__card`)
