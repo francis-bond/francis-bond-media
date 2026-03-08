@@ -165,10 +165,10 @@ if (slides.length > 1) {
   }
 }());
 
-// ===== LIGHTBOX =====
+// ===== LIGHTBOX (mobile only) =====
 (function () {
   var gallery = document.querySelector('.project-gallery');
-  if (!gallery) return;
+  if (!gallery || window.innerWidth >= 768) return;
 
   // Create lightbox DOM
   var lightbox = document.createElement('div');
@@ -255,6 +255,9 @@ if (slides.length > 1) {
   lightbox.addEventListener('touchend', function (e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     var dy = e.changedTouches[0].clientY - touchStartY;
+    // Swipe down to close
+    if (dy > 80 && Math.abs(dy) > Math.abs(dx)) { close(); return; }
+    // Swipe left/right to navigate
     if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
     if (dx > 0) show(currentIndex - 1);
     else show(currentIndex + 1);
