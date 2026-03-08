@@ -107,7 +107,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   color: var(--color-accent);
 }
 
-/* Nav over hero — white text */
+/* Nav over hero — white text and logo */
+.nav--hero .nav__logo img {
+  filter: brightness(0) invert(1);
+}
+
+.nav--hero.scrolled .nav__logo img {
+  filter: none;
+}
+
 .nav--hero .nav__links a {
   color: var(--color-white);
 }
