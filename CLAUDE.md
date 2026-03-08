@@ -45,10 +45,11 @@ CNAME               - GitHub Pages custom domain config
 ## Portfolio Page Order (portfolio.html)
 1. Willow House (Terlingua, TX) - Desert, Remote, Big Bend
 2. Portola Hotel & Spa - Coastal, Elegant, Relaxed
-3. Halcyon - Urban, Boutique, Vibrant
-4. Lucky Arrow Retreat - Rustic, Glamping, Hill Country
-5. Riu Mexico - Tropical, Resort, Paradise
-6. Four Seasons Austin - Luxury, Refined, Iconic
+3. Motel Marfa - Desert, Retro, West Texas
+4. Halcyon - Urban, Boutique, Vibrant
+5. Lucky Arrow Retreat - Rustic, Glamping, Hill Country
+6. Riu Mexico - Tropical, Resort, Paradise
+7. Four Seasons Austin - Luxury, Refined, Iconic
 
 ## Homepage Selected Work Grid (index.html)
 Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
@@ -69,6 +70,10 @@ Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
 - `Lucky Arrow Retreat` → slug `lucky-arrow`
 - `Riu Mexico` → slug `riu-mexico`
 - `Four Seasons Austin` → slug `four-seasons`
+- `Motel Marfa Website finals` → slug `motel-marfa`
+
+### Project tags
+When adding a new portfolio project, generate 3 short descriptor tags that capture the property's location, aesthetic, and vibe. Use the existing tags as reference for tone and style (e.g., "Desert · Remote · Big Bend", "Coastal · Elegant · Relaxed"). Do not ask the user for tags.
 
 ### Highlight image mappings (source filename number → output file)
 - 6213 → willow-house/04 (showcase/thumbnail for Willow House)
@@ -78,6 +83,7 @@ Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
 - 4R5A4148-HDR → lucky-arrow/08
 - 4R5A5431 → portola/20
 - 4R5A5100 → portola/06
+- 4R5A6788-HDR → motel-marfa/20
 - DSCF3012 → riu-mexico/04
 
 ### Images removed from gallery pages (still exist in assets, just not referenced in HTML)
@@ -86,6 +92,7 @@ Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
 - Portola: 02, 08, 10 (4R5A5103, 4R5A5389 + later removals)
 - Riu Mexico: 01, 06, 17 (DSCF3005, DSCF3014, DSCF3141)
 - Willow House: 09, 11, 16, 27, 31, 33, 34, 42, 43 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529 + later removals)
+- Motel Marfa: excluded at optimize time via script (6656, 6681, 6687, 6766, 6793, 6820, DJI 0014, 0020, 0023, 0029, 0035)
 
 ## Gallery Layout System (js/main.js)
 Project gallery pages use a JS-driven row-based justified layout:
@@ -101,12 +108,13 @@ Project gallery pages use a JS-driven row-based justified layout:
 ## Hero Image (data-hero attribute)
 - Any `.project-gallery__item` with `data-hero` is pulled out and placed alone on the first row
 - The JS layout engine handles this before running the normal row-building algorithm
-- Current hero images: Willow House 04, Portola 20, Halcyon 30, Riu Mexico 19, Four Seasons 01
+- Current hero images: Willow House 04, Portola 20, Motel Marfa 20, Halcyon 30, Riu Mexico 19, Four Seasons 01
 
-## Lightbox (js/main.js)
+## Lightbox (js/main.js) — Mobile Only
+- **Mobile only:** Only initializes on viewports under 768px; CSS wrapped in `@media (max-width: 767px)`
 - Built dynamically on project gallery pages (pages with `.project-gallery`)
-- Opens fullscreen overlay on image tap/click; close via x button, backdrop tap, or Escape
-- Left/right arrow buttons navigate all images in a loop; keyboard arrows and swipe gestures supported
+- Opens fullscreen overlay on image tap; close via x button, backdrop tap, Escape, or swipe down
+- Left/right arrow buttons navigate all images in a loop; swipe left/right also supported
 - Collects images after gallery layout builds, so it works with the row-based layout system
 - CSS classes: `.lightbox`, `.lightbox__img`, `.lightbox__close`, `.lightbox__nav`, `.lightbox__nav--prev/--next`
 - Body scroll is locked while lightbox is open
@@ -123,7 +131,7 @@ Project gallery pages use a JS-driven row-based justified layout:
 
 ## Design Details
 - Fonts: Playfair Display (serif headings), Inter (sans body)
-- Accent color: `#b08d6e` (warm bronze)
+- Accent color: `#b08d6e` (warm bronze); stats numbers use lighter `#d4b89a` over dark parallax bg
 - Mobile nav: hamburger slides in from right; `.nav--hero` links switch to dark text when open
 - Instagram: @francisbondmedia (link in footer of every page, SVG icon)
 

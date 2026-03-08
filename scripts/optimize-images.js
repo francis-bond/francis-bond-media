@@ -12,6 +12,7 @@ const PROPERTIES = [
   { folder: 'Four Seasons Austin', slug: 'four-seasons' },
   { folder: 'Riu Mexico', slug: 'riu-mexico' },
   { folder: 'Willow House Final Website', slug: 'willow-house' },
+  { folder: 'Motel Marfa Website finals', slug: 'motel-marfa', exclude: ['6656', '6681', '6687', '6766', '6793', '6820', '0014', '0020', '0023', '0029', '0035'] },
 ];
 
 const SIZES = [
@@ -54,8 +55,10 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
     console.log(`${property.folder} → ${property.slug}/`);
 
+    const excludePatterns = property.exclude || [];
     const files = fs.readdirSync(srcDir)
       .filter(f => /\.(jpg|jpeg|png|tiff?)$/i.test(f))
+      .filter(f => !excludePatterns.some(p => f.includes(p)))
       .sort();
 
     const manifest = {};
