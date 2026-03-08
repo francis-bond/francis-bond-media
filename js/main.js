@@ -91,11 +91,24 @@ if (slides.length > 1) {
         allItems.push({ el: el, w: d.width, h: d.height, orient: d.orientation });
       });
 
-      var portraits = allItems.filter(function (i) { return i.orient === 'portrait'; });
-      var landscapes = allItems.filter(function (i) { return i.orient === 'landscape'; });
+      // Pull out hero image (data-hero) for a solo first row
+      var heroItem = null;
+      var remaining = [];
+      allItems.forEach(function (item) {
+        if (!heroItem && item.el.hasAttribute('data-hero')) {
+          heroItem = item;
+        } else {
+          remaining.push(item);
+        }
+      });
+
+      var portraits = remaining.filter(function (i) { return i.orient === 'portrait'; });
+      var landscapes = remaining.filter(function (i) { return i.orient === 'landscape'; });
 
       // Build row groups (arrays of items)
-      var rows = buildRows(portraits.slice(), landscapes.slice());
+      var rows = [];
+      if (heroItem) rows.push([heroItem]);
+      rows = rows.concat(buildRows(portraits.slice(), landscapes.slice()));
 
       // Rebuild gallery DOM with explicit row divs
       while (gallery.firstChild) gallery.removeChild(gallery.firstChild);

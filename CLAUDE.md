@@ -82,10 +82,10 @@ Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
 
 ### Images removed from gallery pages (still exist in assets, just not referenced in HTML)
 - Four Seasons: 06, 09, 11 (DSCF3309, DSCF3312, DSCF3315)
-- Halcyon: 10, 11, 15 (4R5A5626, 4R5A5627, 4R5A5636)
-- Portola: 08, 10 (4R5A5103, 4R5A5389)
+- Halcyon: 10, 11, 15, 23 (4R5A5626, 4R5A5627, 4R5A5636 + later removals)
+- Portola: 02, 08, 10 (4R5A5103, 4R5A5389 + later removals)
 - Riu Mexico: 01, 06, 17 (DSCF3005, DSCF3014, DSCF3141)
-- Willow House: 09, 11, 16, 27, 42 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529)
+- Willow House: 09, 11, 16, 27, 31, 33, 34, 42, 43 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529 + later removals)
 
 ## Gallery Layout System (js/main.js)
 Project gallery pages use a JS-driven row-based justified layout:
@@ -97,6 +97,11 @@ Project gallery pages use a JS-driven row-based justified layout:
 - **Centering:** `justify-content: center` on `.gallery-row` — rows with fewer images center naturally
 - **No cropping:** `object-fit: cover` on images that perfectly match their container ratio
 - CSS classes used: `.project-gallery` (column flex container), `.gallery-row` (row), `.gallery-row__item` (item)
+
+## Hero Image (data-hero attribute)
+- Any `.project-gallery__item` with `data-hero` is pulled out and placed alone on the first row
+- The JS layout engine handles this before running the normal row-building algorithm
+- Current hero images: Willow House 04, Portola 20, Halcyon 30, Riu Mexico 19, Four Seasons 01
 
 ## Lightbox (js/main.js)
 - Built dynamically on project gallery pages (pages with `.project-gallery`)
