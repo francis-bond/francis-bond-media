@@ -711,13 +711,20 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     position: relative;
     background-size: 100% auto;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border-bottom: none;
     overflow: hidden;
+  }
+
+  .portfolio-row:first-child {
+    border-top: none;
   }
 
   .portfolio-row::before {
     content: "";
     position: absolute;
-    inset: -1px 0;
+    inset: 0;
     background: rgba(255, 255, 255, 0.82);
     z-index: 0;
   }
