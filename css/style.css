@@ -711,12 +711,13 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     position: relative;
     background-size: 100% auto;
     background-position: center;
+    overflow: hidden;
   }
 
   .portfolio-row::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -1px 0;
     background: rgba(255, 255, 255, 0.82);
     z-index: 0;
   }
