@@ -3,31 +3,44 @@ const rows = document.querySelectorAll('.portfolio-row');
 const bgLayers = document.querySelectorAll('.portfolio-bg');
 const bgOverlay = document.querySelector('.portfolio-bg-overlay');
 const portfolioList = document.querySelector('.portfolio-list');
+const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-let activeProject = null;
-
-rows.forEach(row => {
-  row.addEventListener('mouseenter', () => {
+// Mobile: copy background image from the full-viewport layers onto each row
+if (isMobile) {
+  rows.forEach(row => {
     const project = row.dataset.project;
-    if (project === activeProject) return;
+    const layer = document.querySelector(`.portfolio-bg[data-project="${project}"]`);
+    if (layer) {
+      row.style.backgroundImage = layer.style.backgroundImage;
+    }
+  });
+} else {
+  // Desktop: hover effect
+  let activeProject = null;
 
-    activeProject = project;
-    bgOverlay.classList.add('active');
+  rows.forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      const project = row.dataset.project;
+      if (project === activeProject) return;
 
-    bgLayers.forEach(layer => {
-      if (layer.dataset.project === project) {
-        layer.classList.add('active');
-      } else {
-        layer.classList.remove('active');
-      }
+      activeProject = project;
+      bgOverlay.classList.add('active');
+
+      bgLayers.forEach(layer => {
+        if (layer.dataset.project === project) {
+          layer.classList.add('active');
+        } else {
+          layer.classList.remove('active');
+        }
+      });
     });
   });
-});
 
-if (portfolioList) {
-  portfolioList.addEventListener('mouseleave', () => {
-    activeProject = null;
-    bgOverlay.classList.remove('active');
-    bgLayers.forEach(layer => layer.classList.remove('active'));
-  });
+  if (portfolioList) {
+    portfolioList.addEventListener('mouseleave', () => {
+      activeProject = null;
+      bgOverlay.classList.remove('active');
+      bgLayers.forEach(layer => layer.classList.remove('active'));
+    });
+  }
 }

@@ -700,6 +700,38 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   text-transform: uppercase;
 }
 
+/* --- Portfolio Mobile: image strips behind each row --- */
+@media (max-width: 767px) {
+  .portfolio-bg,
+  .portfolio-bg-overlay {
+    display: none;
+  }
+
+  .portfolio-row {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .portfolio-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.82);
+    z-index: 0;
+  }
+
+  .portfolio-row__name,
+  .portfolio-row__tags {
+    position: relative;
+    z-index: 1;
+  }
+
+  .portfolio-row:hover {
+    padding-left: 3rem;
+  }
+}
+
 /* --- Project Page --- */
 .project-header {
   padding: 2rem 3rem 4rem;
