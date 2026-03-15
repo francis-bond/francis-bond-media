@@ -709,7 +709,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
   .portfolio-row {
     position: relative;
-    background-size: cover;
+    background-size: 100% auto;
     background-position: center;
   }
 
