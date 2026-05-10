@@ -473,6 +473,30 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   display: block;
 }
 
+.services__image video {
+  display: block;
+  max-height: 440px;
+  width: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.project-video {
+  padding: 0 2rem 2rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.project-video video {
+  display: block;
+  width: auto;
+  height: 600px;
+  border-radius: 4px;
+}
+
 .services__text h3 {
   margin-bottom: 1rem;
 }

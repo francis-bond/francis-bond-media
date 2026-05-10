@@ -22,7 +22,7 @@ Showcase hospitality photography and videography by Francis Bond Media. Target a
 ## Project Structure
 ```
 index.html          - Home page (hero, stats, portfolio preview, services, about, CTA)
-portfolio.html      - Portfolio listing (hover-to-preview background effect)
+portfolio.html      - Portfolio listing (desktop: hover-to-preview background; mobile: image strips behind each row)
 contact.html        - Contact form (Formspree) + phone/email
 projects/           - Individual project pages (one per property)
   willow-house.html
@@ -33,7 +33,7 @@ projects/           - Individual project pages (one per property)
   four-seasons.html
 css/style.css       - All styles (single file)
 js/main.js          - Shared JS (nav toggle, scroll animations, hero slideshow, gallery layout, lightbox)
-js/portfolio.js     - Portfolio page hover background effect
+js/portfolio.js     - Portfolio page: desktop hover background effect; mobile image strip assignment
 assets/images/      - Optimized images, organized by project name
   <slug>/
     01-full.jpg, 01-thumb.jpg ...

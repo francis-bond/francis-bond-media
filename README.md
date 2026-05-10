@@ -9,7 +9,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 - **Hero slideshow** — Rotating highlight images across projects
 - **Stats section** — Data-driven case for professional photography
 - **Portfolio preview** — 2x2 grid linking to individual project galleries (Lucky Arrow, Halcyon, Riu Mexico, Willow House)
-- **Services** — Photography, Videography, and Drone & Aerial
+- **Services** — Photography, Videography, and Drone & Aerial (drone row uses an autoplay looping video)
 - **About** — Bio and headshot
 - **CTA** — Call-to-action leading to contact page
 - **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed
@@ -23,6 +23,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 - [Sharp](https://sharp.pixelplumbing.com/) for image optimization
 - GitHub Pages hosting with custom domain via Cloudflare DNS
 - Formspree for contact form submissions
+- [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/) for video hosting (no egress fees); see `VIDEO_WORKFLOW.md` for upload process
 
 ## Local Development
 
