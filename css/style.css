@@ -1211,3 +1211,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     font-size: 0.75rem;
   }
 }
+
+@media (max-width: 768px) {
+  .services__image video {
+    width: 100%;
+    max-height: 300px;
+    margin: 0;
+  }
+
+  .project-video video {
+    height: 380px;
+  }
+}
