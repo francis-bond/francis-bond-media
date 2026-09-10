@@ -30,6 +30,7 @@ projects/           - Individual project pages (one per property)
   halcyon.html
   lucky-arrow.html
   riu-mexico.html
+  ramons-village.html
   four-seasons.html
 css/style.css       - All styles (single file)
 js/main.js          - Shared JS (nav toggle, scroll animations, hero slideshow, gallery layout, lightbox)
@@ -49,7 +50,8 @@ CNAME               - GitHub Pages custom domain config
 4. Halcyon - Urban, Boutique, Vibrant
 5. Lucky Arrow Retreat - Rustic, Glamping, Hill Country
 6. Riu Mexico - Tropical, Resort, Paradise
-7. Four Seasons Austin - Luxury, Refined, Iconic
+7. Ramon's Village Resort (San Pedro, Belize) - Caribbean, Barefoot, Belize
+8. Four Seasons Austin - Luxury, Refined, Iconic
 
 ## Homepage Selected Work Grid (index.html)
 Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
@@ -71,6 +73,7 @@ Four featured projects (2x2): Willow House, Halcyon, Riu Mexico, Lucky Arrow
 - `Riu Mexico` → slug `riu-mexico`
 - `Four Seasons Austin` → slug `four-seasons`
 - `Motel Marfa Website finals` → slug `motel-marfa`
+- `Ramon's Village Resort` → slug `ramons-village`
 
 ### Project tags
 When adding a new portfolio project, generate 3 short descriptor tags that capture the property's location, aesthetic, and vibe. Use the existing tags as reference for tone and style (e.g., "Desert · Remote · Big Bend", "Coastal · Elegant · Relaxed"). Do not ask the user for tags.
@@ -85,21 +88,33 @@ When adding a new portfolio project, generate 3 short descriptor tags that captu
 - 4R5A5100 → portola/06
 - 4R5A6788-HDR → motel-marfa/20
 - DSCF3012 → riu-mexico/04
+- 4R5A8054 → ramons-village/03 (hero)
 
 ### Images removed from gallery pages (still exist in assets, just not referenced in HTML)
 - Four Seasons: 06, 09, 11 (DSCF3309, DSCF3312, DSCF3315)
-- Halcyon: 10, 11, 15, 23 (4R5A5626, 4R5A5627, 4R5A5636 + later removals)
-- Portola: 02, 08, 10 (4R5A5103, 4R5A5389 + later removals)
-- Riu Mexico: 01, 06, 17 (DSCF3005, DSCF3014, DSCF3141)
-- Willow House: 09, 11, 16, 27, 31, 33, 34, 42, 43 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529 + later removals)
-- Motel Marfa: excluded at optimize time via script (6656, 6681, 6687, 6766, 6793, 6820, DJI 0014, 0020, 0023, 0029, 0035)
+- Lucky Arrow: 13, 15 (4R5A4194-HDR, 4R5A4204-HDR) - redundancy pass, 16 to 14 images
+- Halcyon: 10, 11, 15, 23 (4R5A5626, 4R5A5627, 4R5A5636 + later removals),
+  plus 26 (4R5A5702) - redundancy pass, 26 to 25 images
+- Portola: 02, 08, 10 (4R5A5103, 4R5A5389 + later removals),
+  plus 05, 07, 09, 12 (4R5A5082-HDR, 4R5A5101, 4R5A5384-HDR, 4R5A5399-HDR) - redundancy pass, 17 to 13 images
+- Riu Mexico: 01, 06, 17 (DSCF3005, DSCF3014, DSCF3141),
+  plus 10, 13 (DSCF3114, DSCF3125) - redundancy pass, 18 to 16 images
+- Willow House: 09, 11, 16, 27, 31, 33, 34, 42, 43 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529 + later removals),
+  plus 06, 20, 23, 30, 40, 45 (4R5A6232-HDR, 4R5A6368-HDR, 4R5A6384, 4R5A6403, 4R5A6485, 4R5A6539) - redundancy pass, 36 to 30 images
+- Motel Marfa: excluded at optimize time via script (6656, 6681, 6687, 6766, 6793, 6820, DJI 0014, 0020, 0023, 0029, 0035),
+  plus 01, 13, 16 (4R5A6652, 4R5A6726-HDR, 4R5A6754) removed from HTML - redundancy pass, 27 to 24 images
+- Ramon's Village: 04, 08, 22, 27 (4R5A8057, 4R5A8070, 4R5A8171, 4R5A8207) - near-duplicates of 03/07/21/26
 
 ## Gallery Layout System (js/main.js)
 Project gallery pages use a JS-driven row-based justified layout:
 - Fetches `manifest.json` from the same image directory
 - Builds rows using `buildRows(portraits, landscapes)` — deterministic algorithm
 - **Rules:** max 3 portraits per row, max 2 landscapes per row, mixed rows (1P+1L) allowed
-- **Pattern:** portrait rows alternate 3/2 images; a mixed or landscape row inserted every 2 portrait rows
+- **Pattern:** each step picks the row shape whose bucket is furthest behind, so portraits and
+  landscapes run out at roughly the same point instead of one orientation piling up at the end.
+  Portrait rows alternate 3/2 images. The same row shape never repeats more than twice in a row.
+- **Why:** the previous version drained portraits ~5 per cycle and landscapes ~1, which left every
+  page ending in a long block of identical landscape rows (Willow House had 8, Halcyon 7).
 - **Row height:** calculated so images fill container width exactly at natural aspect ratio; capped at 700px desktop / 320px mobile
 - **Centering:** `justify-content: center` on `.gallery-row` — rows with fewer images center naturally
 - **No cropping:** `object-fit: cover` on images that perfectly match their container ratio
@@ -108,7 +123,7 @@ Project gallery pages use a JS-driven row-based justified layout:
 ## Hero Image (data-hero attribute)
 - Any `.project-gallery__item` with `data-hero` is pulled out and placed alone on the first row
 - The JS layout engine handles this before running the normal row-building algorithm
-- Current hero images: Willow House 04, Portola 20, Motel Marfa 20, Halcyon 30, Riu Mexico 19, Four Seasons 01
+- Current hero images: Willow House 04, Portola 20, Motel Marfa 20, Halcyon 30, Lucky Arrow 08, Riu Mexico 19, Ramon's Village 03, Four Seasons 01
 
 ## Lightbox (js/main.js) — Mobile Only
 - **Mobile only:** Only initializes on viewports under 768px; CSS wrapped in `@media (max-width: 767px)`

@@ -134,32 +134,66 @@ if (slides.length > 1) {
     .catch(function (e) { console.warn('Gallery manifest not found:', e); });
 
   // Deterministic row-building algorithm.
-  // Pattern: portrait rows (alternating 3/2) with a mixed or landscape row
-  // inserted every 2 portrait rows for visual variety.
+  // Drains portraits and landscapes proportionally so neither orientation piles
+  // up at the end of the page, and never repeats the same row shape more than
+  // twice consecutively. Row shapes: 'P' (3 or 2 portraits, alternating),
+  // 'M' (mixed 1P + 1L), 'L' (2 landscapes).
   function buildRows(p, l) {
     var rows = [];
     var pBatch = 3;
-    var breakCount = 0;
+    var recent = [];
+    var mixedCount = 0;
+
+    function canDo(shape) {
+      if (shape === 'P') return p.length > 0;
+      if (shape === 'L') return l.length > 0;
+      return p.length > 0 && l.length > 0;
+    }
+
+    function take(shape) {
+      if (shape === 'P') {
+        var row = p.splice(0, Math.min(pBatch, p.length));
+        pBatch = pBatch === 3 ? 2 : 3;
+        return row;
+      }
+      if (shape === 'L') return l.splice(0, Math.min(2, l.length));
+      // Mixed rows alternate which side the portrait sits on, so the page does
+      // not read as a column of portraits down the left edge.
+      var portraitFirst = mixedCount % 2 === 0;
+      mixedCount++;
+      return portraitFirst ? [p.shift(), l.shift()] : [l.shift(), p.shift()];
+    }
 
     while (p.length > 0 || l.length > 0) {
-      if (p.length === 0) {
-        rows.push(l.splice(0, Math.min(2, l.length)));
-      } else if (l.length === 0) {
-        rows.push(p.splice(0, Math.min(pBatch, p.length)));
-        pBatch = pBatch === 3 ? 2 : 3;
-      } else if (breakCount >= 2) {
-        // Insert variety: alternate between mixed and landscape-only rows
-        if (breakCount % 2 === 0) {
-          rows.push([p.shift(), l.shift()]); // mixed: 1P + 1L
-        } else {
-          rows.push(l.splice(0, Math.min(2, l.length))); // landscape row
-        }
-        breakCount = 0;
+      // Rows each bucket still needs at its natural rate: portrait rows average
+      // 2.5 images, landscape rows take 2. Prefer whichever is further behind.
+      var pNeed = p.length / 2.5;
+      var lNeed = l.length / 2;
+      var order;
+      if (pNeed > lNeed + 0.5) {
+        order = ['P', 'M', 'L'];
+      } else if (lNeed > pNeed + 0.5) {
+        order = ['L', 'M', 'P'];
       } else {
-        rows.push(p.splice(0, Math.min(pBatch, p.length)));
-        pBatch = pBatch === 3 ? 2 : 3;
-        breakCount++;
+        order = ['M', 'P', 'L'];
       }
+
+      var stale = recent.length === 2 && recent[0] === recent[1] ? recent[0] : null;
+
+      var pick = null;
+      var i;
+      for (i = 0; i < order.length; i++) {
+        if (canDo(order[i]) && order[i] !== stale) { pick = order[i]; break; }
+      }
+      if (!pick) {
+        for (i = 0; i < order.length; i++) {
+          if (canDo(order[i])) { pick = order[i]; break; }
+        }
+      }
+
+      rows.push(take(pick));
+      recent.push(pick);
+      if (recent.length > 2) recent.shift();
     }
     return rows;
   }
