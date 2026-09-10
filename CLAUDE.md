@@ -96,7 +96,8 @@ When adding a new portfolio project, generate 3 short descriptor tags that captu
 - Halcyon: 10, 11, 15, 23 (4R5A5626, 4R5A5627, 4R5A5636 + later removals),
   plus 26 (4R5A5702) - redundancy pass, 26 to 25 images
 - Portola: 02, 08, 10 (4R5A5103, 4R5A5389 + later removals),
-  plus 05, 07, 09, 12 (4R5A5082-HDR, 4R5A5101, 4R5A5384-HDR, 4R5A5399-HDR) - redundancy pass, 17 to 13 images
+  plus 05, 09 (4R5A5082-HDR, 4R5A5384-HDR) - redundancy pass, 17 to 15 images
+  (07 and 12 were cut then restored: they were 2 of Portola's 4 portraits and the page went too landscape-heavy without them)
 - Riu Mexico: 01, 06, 17 (DSCF3005, DSCF3014, DSCF3141),
   plus 10, 13 (DSCF3114, DSCF3125) - redundancy pass, 18 to 16 images
 - Willow House: 09, 11, 16, 27, 31, 33, 34, 42, 43 (4R5A6249, 4R5A6265, 4R5A6305, 4R5A6395, 4R5A6529 + later removals),
@@ -140,6 +141,8 @@ Project gallery pages use a JS-driven row-based justified layout:
 - Section background alternation: `section--muted` (#f3f1ee), `section--dark` (#eae7e2)
 - Images stored in `assets/images/<project-name>/` with numbered filenames
 - Page titles use `|` as separator (e.g., `Willow House | Francis Bond Media`)
+- **Alt text:** every gallery image gets its own descriptive alt describing what is in the frame,
+  not the property name repeated. No trailing period, no "photo of". Write new ones to match.
 - No em dashes in any visible copy — use commas, periods, or colons instead
 - Right-click on images is disabled site-wide (contextmenu listener in main.js)
 - Favicon: `FBM_favicon_280x280.png`, Logo: `Minimalist_FBM_Logo_Transparent-2.png`
