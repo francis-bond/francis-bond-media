@@ -334,7 +334,10 @@ if (animatedElements.length > 0) {
       }
     });
   }, {
-    threshold: 0.1,
+    // threshold is a fraction of the element's own height, so 0.1 on a very tall element
+    // (a long project gallery) can need more pixels on screen than the window has, and
+    // the element never fades in. 0 fires as soon as any part enters the viewport.
+    threshold: 0,
     rootMargin: '0px 0px -40px 0px'
   });
 
