@@ -22,20 +22,22 @@ ffmpeg -i input.mp4 -map 0:v:0 -c copy -write_tmcd 0 -movflags +faststart output
 
 ### 2. Upload to Cloudflare R2
 - Bucket: `portfoliowebsite` (dash.cloudflare.com → R2 → portfoliowebsite)
-- Public dev URL base: `https://pub-ae10c7c775f64f7e9bd33eb61de9ae8f.r2.dev/`
-- Full URL format: `https://pub-ae10c7c775f64f7e9bd33eb61de9ae8f.r2.dev/your-filename.mp4`
+- Public URL base: `https://media.francisbondmedia.com/` (custom domain connected to the bucket, 2026-09-15)
+- Full URL format: `https://media.francisbondmedia.com/your-filename.mp4`
+- Upload a file to the bucket and it's immediately available at that address. Always use this domain in site code.
 - Free tier: 10GB storage, 1M Class A (write) and 10M Class B (read) requests/month, egress always free.
   Enabling R2 requires a payment method on file even at $0; it's only billed past the free tier.
-- **Note:** Cloudflare documents `r2.dev` URLs as rate-limited and intended for development only.
-  For production, connect a custom domain to the bucket (e.g. `media.francisbondmedia.com`,
-  R2 → portfoliowebsite → Settings → Custom Domains). If that's done, update every `src` and this doc.
+- **Never use the `r2.dev` address** (`pub-ae10c7c775f64f7e9bd33eb61de9ae8f.r2.dev`) in site code. Cloudflare rate-limits
+  it and documents it as development-only. In September 2026 it throttled the 11MB Ramon's video to
+  1.5–7.5 Mbit/s, below its 8.1 Mbit/s bitrate, so it took ~45s to start. The custom domain goes through
+  Cloudflare's normal network and cache and served the same file at 100–200 Mbit/s.
 
 ### 3. Add to the site
 Use a standard HTML5 video element — no JavaScript needed, no backend required:
 
 ```html
 <video
-  src="https://pub-ae10c7c775f64f7e9bd33eb61de9ae8f.r2.dev/your-filename.mp4"
+  src="https://media.francisbondmedia.com/your-filename.mp4"
   autoplay
   muted
   loop
@@ -71,4 +73,7 @@ The first two predate the 1080p standard above and are 4K.
 ## Notes
 - Do not host video files in the GitHub repo — file size limits and no streaming
 - R2 has no egress fees (unlike AWS S3) — serving the file to visitors is free
-- If the R2 dev URL ever changes, update all `src` attributes and this table
+- If the custom domain ever changes, update all `src` attributes and this doc
+- Lower-bitrate (3 Mbit/s, 1080p) versions of the two Ramon's videos are in
+  `Website Formated Hotel content/Ramon's Village Resort/web-video-3mbps/` if phone load time ever becomes a problem.
+  Same filenames, so uploading them over the originals needs no code change.
