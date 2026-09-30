@@ -21,10 +21,10 @@ Showcase hospitality photography and videography by Francis Bond Media. Target a
 
 ## Project Structure
 ```
-index.html          - Home page (hero, stats, portfolio preview, services, about, CTA)
+index.html          - Home page (hero, stats, portfolio preview, services, about, CTA with Book a Call + Get in Touch)
 portfolio.html      - Portfolio listing (desktop: hover-to-preview background; mobile: image strips behind each row)
 contact.html        - Contact form (Formspree) + phone/email
-projects/           - Individual project pages (one per property)
+projects/           - Individual project pages (one per property); each ends with a Book a Call CTA section and has its own OG meta tags (see README)
   willow-house.html
   portola.html
   halcyon.html
@@ -144,6 +144,7 @@ Project gallery pages use a JS-driven row-based justified layout:
 - **Alt text:** every gallery image gets its own descriptive alt describing what is in the frame,
   not the property name repeated. No trailing period, no "photo of". Write new ones to match.
 - No em dashes in any visible copy — use commas, periods, or colons instead
+- Portfolio properties were self-initiated shoots, not clients: never write "trusted by", "clients include", or "worked with" copy for them
 - Right-click on images is disabled site-wide (contextmenu listener in main.js)
 - Favicon: `FBM_favicon_280x280.png`, Logo: `Minimalist_FBM_Logo_Transparent-2.png`
 

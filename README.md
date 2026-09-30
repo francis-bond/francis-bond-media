@@ -12,7 +12,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 - **Services** — Photography, Videography, and Drone & Aerial (drone row uses an autoplay looping video)
 - **About** — Bio and headshot
 - **CTA** — Call-to-action leading to contact page
-- **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed. Fields: property, name, email (required; Formspree uses it as reply-to), message
+- **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed. Fields: property, name, email (required; Formspree uses it as reply-to), message. Contact page also links the discovery call booking page
 - **Instagram** — @francisbondmedia linked in footer across all pages
 - **Gallery layout** — Project pages build justified rows from each image's real aspect ratio, balancing portrait and landscape images so neither orientation clusters at the end of the page
 - **Lightbox** — Tap/click any gallery image to view fullscreen; navigate between images with arrows or swipe; close via button, backdrop tap, or Escape key
@@ -49,3 +49,8 @@ npm run optimize
 ```
 
 This generates full-size (2400px) and thumbnail (1200px) versions into `assets/images/`.
+
+## Booking & Sharing
+
+- **Booking link:** Google Calendar appointment page (`https://calendar.app.google/JHwbpExEV4CYzfRPA`, 20-min discovery calls) linked from the homepage CTA ("Book a Call"), the contact page, and a CTA section at the bottom of every project page. If the link changes, search the repo for `calendar.app.google` and replace.
+- **Link previews:** every page has Open Graph + Twitter card tags. Project pages use their hero image thumb (`<slug>/<hero>-thumb.jpg`, 1200x800); homepage, portfolio, and contact use `willow-house/04-thumb.jpg`. When adding a project page, copy the meta block from an existing one and point it at the new hero.

@@ -1223,3 +1223,21 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     height: 380px;
   }
 }
+
+/* --- CTA: two buttons (Book a Call + Get in Touch) --- */
+.cta__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cta__button--outline {
+  background: transparent;
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.cta__button--outline:hover {
+  border-color: var(--color-accent);
+}
