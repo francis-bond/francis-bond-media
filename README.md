@@ -12,7 +12,7 @@ Portfolio website for Francis Bond Media — hospitality photography and videogr
 - **Services** — Photography, Videography, and Drone & Aerial (drone row uses an autoplay looping video)
 - **About** — Bio and headshot
 - **CTA** — Call-to-action leading to contact page
-- **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed
+- **Contact form** — Powered by [Formspree](https://formspree.io) with phone/email displayed. Fields: property, name, email (required; Formspree uses it as reply-to), message
 - **Instagram** — @francisbondmedia linked in footer across all pages
 - **Gallery layout** — Project pages build justified rows from each image's real aspect ratio, balancing portrait and landscape images so neither orientation clusters at the end of the page
 - **Lightbox** — Tap/click any gallery image to view fullscreen; navigate between images with arrows or swipe; close via button, backdrop tap, or Escape key
